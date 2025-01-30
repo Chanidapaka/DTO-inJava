@@ -7,6 +7,8 @@ import lombok.Setter;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+//เกิดจากการMapper ของDatabase --> Auto
+
 @Getter
 @Setter
 @Entity

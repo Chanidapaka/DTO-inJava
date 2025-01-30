@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+//เกิดจากการMapper ของDatabase --> Auto
+
 @Getter
 @Setter
 @Entity

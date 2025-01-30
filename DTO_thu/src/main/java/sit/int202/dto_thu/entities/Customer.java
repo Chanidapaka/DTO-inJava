@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-//เกิดจากการMapper ของDatabase
+//เกิดจากการMapper ของDatabase --> Auto
 @Getter
 @Setter
 @Entity
