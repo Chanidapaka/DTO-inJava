@@ -50,7 +50,7 @@ public class Customer {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "salesRepEmployeeNumber")
-    private Employee salesRepEmployeeNumber;
+    private Employee salesRepEmployeeNumber; //--> อยากได้แค่ชื่อ นามสกุล ไม่ได้อยากได้ทั้ง object
 
     @Column(name = "creditLimit", precision = 10, scale = 2)
     private BigDecimal creditLimit;
