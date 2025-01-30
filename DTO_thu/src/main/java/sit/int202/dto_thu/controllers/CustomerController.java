@@ -15,7 +15,7 @@ import sit.int202.dto_thu.services.CustomerService;
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
-    @Autowired
+    @Autowired //ในที่นี้คือการ Inject CustomerService และ ModelMapper มาใช้ใน Controller
     private CustomerService customerService;
 
     @Autowired
@@ -23,7 +23,9 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SimpleCustomerDto> getAllCustomers(@PathVariable int id) {
-        Customer customer = customerService.findById(id);  //เอา obj.ของ customer
+        // ค้นหาลูกค้าจาก id
+        Customer customer = customerService.findById(id);
+
         return ResponseEntity.ok(modelMapper.map(customer, SimpleCustomerDto.class)); //--> ได้ obj. มา mapper
     }
 }
