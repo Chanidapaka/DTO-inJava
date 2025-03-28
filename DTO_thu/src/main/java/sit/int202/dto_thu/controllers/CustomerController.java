@@ -31,34 +31,27 @@ public class CustomerController {
 
     @GetMapping("")
     public ResponseEntity<Object> findAllCustomers(
-            @RequestParam(required = false) Integer pageNo,
-            @RequestParam(required = false) Integer pageSize
-    ) {
-        if(pageNo == null || pageSize == null){
+            @RequestParam(required = false) Integer pageNo
+            , @RequestParam(required = false) Integer pageSize) {
+        if(pageNo == null || pageSize == null) {
             List<Customer> customerList = customerService.findAll();
 //            return ResponseEntity.ok(customerList.stream()
 //                    .map(c -> modelMapper.map(c, SimpleCustomerDto.class)).toList());
             return ResponseEntity.ok(
                     listMapper.mapList(customerList, SimpleCustomerDto.class, modelMapper));
-        }else{
-            // หากระบุ pageNo และ pageSize จะใช้การแบ่งหน้า
-            Page<Customer> page = customerService.findAll(pageNo, pageSize); // ดึงข้อมูลลูกค้าตามการแบ่งหน้า
-
-            // แปลงข้อมูลใน content ไปเป็น SimpleCustomerDto
-            //PageDTO<SimpleCustomerDto> pageDto = modelMapper.map(page, PageDTO.class);
-
-            // แปลงแต่ละรายการใน content ของ page ไปเป็น SimpleCustomerDto
-//            pageDto.setContent(page.getContent().stream()
-//                    .map(c -> modelMapper.map(c, SimpleCustomerDto.class)).toList());
-            return ResponseEntity.ok(listMapper.toPageDTO(page, SimpleCustomerDto.class, modelMapper));  // ส่งคืน PageDTO ที่มีข้อมูลที่แปลงแล้ว
+        } else {
+            Page<Customer> page = customerService.findAll(pageNo, pageSize);
+//            PageDto<SimpleCustomerDto> pageDto = modelMapper.map(page, PageDto.class);
+//            pageDto.setContent(page.getContent().stream().map(
+//                    c->modelMapper.map(c, SimpleCustomerDto.class)).toList());
+            return ResponseEntity.ok(listMapper.toPageDTO(page,SimpleCustomerDto.class,modelMapper));
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SimpleCustomerDto> getAllCustomers(@PathVariable int id) {
-        // ค้นหาลูกค้าจาก id
+    public ResponseEntity<SimpleCustomerDto> getCustomer(@PathVariable int id) {
         Customer customer = customerService.findById(id);
-
-        return ResponseEntity.ok(modelMapper.map(customer, SimpleCustomerDto.class)); //--> ได้ obj. มา mapper
+        return ResponseEntity.ok(modelMapper.map(customer, SimpleCustomerDto.class));
     }
 }
+
